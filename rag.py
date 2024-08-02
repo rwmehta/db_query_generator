@@ -102,7 +102,7 @@ from dotenv import load_dotenv, dotenv_values
 load_dotenv() 
 
 pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
-index_name = "db-trial-1"
+index_name = "db-trial-2"
 index = pc.Index(index_name)
 
 import openai 
@@ -125,7 +125,7 @@ x = embed([query])
 results = index.query(
     namespace="ns1",
     vector=x[0],
-    top_k=10,
+    top_k=50,
     include_values=False,
     include_metadata=True
 )

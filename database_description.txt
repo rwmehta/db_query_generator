@@ -1,8 +1,3 @@
-The following data is about a relational database for dvd rentals and is organized in this manner:
-
-Table Name - descriptions
-- column names : description
-
 actor : stores actor data including first name and last name.
 - actor_id : a unique id that corresponds to a specific actor
 - first_name : first name of an actor

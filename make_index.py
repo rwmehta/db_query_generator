@@ -6,7 +6,7 @@ load_dotenv()
 
 pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
 
-index_name = "db-trial-1"
+index_name = "db-trial-2"
 
 if index_name not in pc.list_indexes().names():
     pc.create_index(
@@ -25,33 +25,28 @@ def parse_table_columns(file_path):
     with open(file_path, 'r') as file:
         lines = file.readlines()
 
-    tables = []
+    table_entries = []
     current_table = ''
-    current_columns = []
+    table_description = ''
 
     for line in lines:
         line = line.strip()
         if ':' in line and not line.startswith('-'):
-            if current_table:
-                table_string = f'Table: {current_table} - Columns: {"; ".join(current_columns)}'
-                tables.append(table_string)
-            current_table = line.split(':')[0].strip()
-            current_columns = []
+            current_table, table_description = line.split(':', 1)
+            current_table = current_table.strip()
+            table_description = table_description.strip()
         elif line.startswith('-'):
             column_name, column_detail = line.split(':', 1)
             column_detail = column_detail.strip()
             column_name = column_name.strip('- ').strip()
-            current_columns.append(f'{column_name}: {column_detail}')
+            table_entries.append(f'Table: {current_table} - Description: {table_description} - Column: {column_name} - Detail: {column_detail}')
 
-    if current_table:
-        table_string = f'Table: {current_table} - Columns: {"; ".join(current_columns)}'
-        tables.append(table_string)
-
-    return tables
+    return table_entries
 
 # Example usage
 file_path = './database_description.txt'
 text_lines = parse_table_columns(file_path)
+
 
 data = []
 for i in range(len(text_lines)):
