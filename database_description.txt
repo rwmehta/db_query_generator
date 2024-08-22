@@ -17,7 +17,7 @@ film : stores film data such as title, release year, length, rating, etc.
 - replacement_cost : the amount of money it takes to replace the film if lost or damaged.
 - rating : the rating according to the motion picture association. This corresponds to what age group is suitable to watch this film.
 - last_update : last time that line in the table was updated
-- special features : extra feautres the film may have such as "Deleted Scenes" or "Trailers"
+- special_features : extra feautres the film may have such as "Deleted Scenes" or "Trailers"
 - fulltext : a list of words that describe the film and numbers that show how often they appear in the description
 
 

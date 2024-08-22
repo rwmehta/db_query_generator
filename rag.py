@@ -100,9 +100,11 @@ from pinecone import Pinecone, ServerlessSpec
 import os
 from dotenv import load_dotenv, dotenv_values 
 load_dotenv() 
+from collections import Counter
+from pinecone_text.hybrid import hybrid_convex_scale
 
 pc = Pinecone(api_key=os.getenv("PINECONE_API_KEY"))
-index_name = "db-trial-2"
+index_name = "db-trial-3"
 index = pc.Index(index_name)
 
 import openai 
@@ -110,27 +112,122 @@ openai.api_key = os.getenv("OPENAI_API_KEY")
 
 # openai_client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
+from transformers import BertTokenizerFast
+# load bert tokenizer from huggingface
+tokenizer = BertTokenizerFast.from_pretrained(
+    'bert-base-uncased'
+)
+
 def embed(docs: list[str]) -> list[list[float]]:
     res = openai.embeddings.create(
         input=docs,
-        model="text-embedding-ada-002"
+        model="text-embedding-3-large"
     )
     doc_embeds = [r.embedding for r in res.data] 
     return doc_embeds 
 
-query = "Give me the number of movies rented per year in canada"
+def build_dict(input_batch):
+  # store a batch of sparse embeddings
+    sparse_emb = []
+    # iterate through input batch
+    for token_ids in input_batch:
+        indices = []
+        values = []
+        # convert the input_ids list to a dictionary of key to frequency values
+        d = dict(Counter(token_ids))
+        # remove special tokens and append sparse vectors to sparse_emb list
+        for idx in d:
+            if idx not in [101, 102, 103, 0]:
+                indices.append(idx)
+                values.append(float(d[idx]))
+        
+        sparse_emb.append({'indices': indices, 'values': values})
+        # sparse_emb.append({key: d[key] for key in d if key not in [101, 102, 103, 0]})
+    # return sparse_emb list
+    return sparse_emb
 
-x = embed([query])
+def generate_sparse_vectors(context_batch):
+    # create batch of input_ids
+    inputs = tokenizer(
+            context_batch, padding=True,
+            truncation=True,
+            max_length=512
+    )['input_ids']
+    # create sparse dictionaries
+    sparse_embeds = build_dict(inputs)
+    return sparse_embeds
 
-results = index.query(
-    namespace="ns1",
-    vector=x[0],
-    top_k=50,
-    include_values=False,
-    include_metadata=True
-)
+# query = "Give me the number of movies rented per year in canada"
 
-print(results)
+# dense = embed([query])
+
+
+def hybrid_scale(dense, sparse, alpha: float):
+    # check alpha value is in range
+    if alpha < 0 or alpha > 1:
+        raise ValueError("Alpha must be between 0 and 1")
+    # scale sparse and dense vectors to create hybrid search vecs
+    hsparse = [{
+        'indices': sparse['indices'],
+        'values':  [v * (1 - alpha) for v in sparse['values']]
+    }]
+    hdense = [v * alpha for v in dense[0]]
+    return hdense, hsparse
+
+
+def hybrid_query(question, top_k, alpha):
+   # convert the question into a sparse vector
+   sparse_vec = generate_sparse_vectors([question])[0]
+   # convert the question into a dense vector
+   dense_vec = embed([question])
+#    print(dense_vec, type(dense_vec))
+#    model.encode([question]).tolist()
+   # scale alpha with hybrid_scale
+   dense_vec, sparse_vec = hybrid_scale(
+      dense_vec, sparse_vec, alpha
+   )
+   # query pinecone with the query parameters
+   result = index.query(
+      vector=dense_vec,
+      sparse_vector=sparse_vec[0],
+      top_k=top_k,
+      include_metadata=True
+   )
+   # return search results as json
+   return result
+
+
+# def hybrid_query(question, top_k, alpha):
+#     # convert the question into a sparse vector
+#     sparse_vec = generate_sparse_vectors([question])
+#     s_embed = sparse_vec
+
+#     print(s_embed[0]["indices"], type(s_embed[0]["indices"][0]), s_embed[0]["values"], type(s_embed[0]["values"][0]))
+
+#     # convert the question into a dense vector
+#     dense_vec = dense
+#     dense_vec, sparse_vector = hybrid_convex_scale(
+#         dense_vec, sparse_vec, alpha=alpha
+#     )
+#     # query pinecone with the query parameters
+#     result = index.query(
+#         vector=dense_vec,
+#         sparse_vector=sparse_vec[0],
+#         top_k=top_k,
+#         include_metadata=True,
+#       )
+#     # return search results as json
+#     return result
+
+# results = index.query(
+#     namespace="ns1",
+#     vector=x[0],
+#     top_k=50,
+#     include_values=False,
+#     include_metadata=True
+# )
+
+# print(hybrid_query(query, 50, 0.5))
 
 
 

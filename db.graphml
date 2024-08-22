@@ -1,0 +1,597 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd"><key id="d1" for="edge" attr.name="relationship" attr.type="string"/>
+<key id="d0" for="node" attr.name="metadata" attr.type="string"/>
+<graph edgedefault="undirected"><node id="actor.actor_id">
+  <data key="d0">{"table": "actor", "column": "actor_id", "data_type": "integer", "is_nullable": false, "default_value": "nextval('actor_actor_id_seq'::regclass)"}</data>
+</node>
+<node id="actor.first_name">
+  <data key="d0">{"table": "actor", "column": "first_name", "data_type": "character varying", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="actor.last_name">
+  <data key="d0">{"table": "actor", "column": "last_name", "data_type": "character varying", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="actor.last_update">
+  <data key="d0">{"table": "actor", "column": "last_update", "data_type": "timestamp without time zone", "is_nullable": false, "default_value": "now()"}</data>
+</node>
+<node id="store.store_id">
+  <data key="d0">{"table": "store", "column": "store_id", "data_type": "integer", "is_nullable": false, "default_value": "nextval('store_store_id_seq'::regclass)"}</data>
+</node>
+<node id="store.manager_staff_id">
+  <data key="d0">{"table": "store", "column": "manager_staff_id", "data_type": "smallint", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="store.address_id">
+  <data key="d0">{"table": "store", "column": "address_id", "data_type": "smallint", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="store.last_update">
+  <data key="d0">{"table": "store", "column": "last_update", "data_type": "timestamp without time zone", "is_nullable": false, "default_value": "now()"}</data>
+</node>
+<node id="address.address_id">
+  <data key="d0">{"table": "address", "column": "address_id", "data_type": "integer", "is_nullable": false, "default_value": "nextval('address_address_id_seq'::regclass)"}</data>
+</node>
+<node id="staff.staff_id">
+  <data key="d0">{"table": "staff", "column": "staff_id", "data_type": "integer", "is_nullable": false, "default_value": "nextval('staff_staff_id_seq'::regclass)"}</data>
+</node>
+<node id="address.address">
+  <data key="d0">{"table": "address", "column": "address", "data_type": "character varying", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="address.address2">
+  <data key="d0">{"table": "address", "column": "address2", "data_type": "character varying", "is_nullable": true, "default_value": null}</data>
+</node>
+<node id="address.district">
+  <data key="d0">{"table": "address", "column": "district", "data_type": "character varying", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="address.city_id">
+  <data key="d0">{"table": "address", "column": "city_id", "data_type": "smallint", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="address.postal_code">
+  <data key="d0">{"table": "address", "column": "postal_code", "data_type": "character varying", "is_nullable": true, "default_value": null}</data>
+</node>
+<node id="address.phone">
+  <data key="d0">{"table": "address", "column": "phone", "data_type": "character varying", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="address.last_update">
+  <data key="d0">{"table": "address", "column": "last_update", "data_type": "timestamp without time zone", "is_nullable": false, "default_value": "now()"}</data>
+</node>
+<node id="city.city_id">
+  <data key="d0">{"table": "city", "column": "city_id", "data_type": "integer", "is_nullable": false, "default_value": "nextval('city_city_id_seq'::regclass)"}</data>
+</node>
+<node id="category.category_id">
+  <data key="d0">{"table": "category", "column": "category_id", "data_type": "integer", "is_nullable": false, "default_value": "nextval('category_category_id_seq'::regclass)"}</data>
+</node>
+<node id="category.name">
+  <data key="d0">{"table": "category", "column": "name", "data_type": "character varying", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="category.last_update">
+  <data key="d0">{"table": "category", "column": "last_update", "data_type": "timestamp without time zone", "is_nullable": false, "default_value": "now()"}</data>
+</node>
+<node id="city.city">
+  <data key="d0">{"table": "city", "column": "city", "data_type": "character varying", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="city.country_id">
+  <data key="d0">{"table": "city", "column": "country_id", "data_type": "smallint", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="city.last_update">
+  <data key="d0">{"table": "city", "column": "last_update", "data_type": "timestamp without time zone", "is_nullable": false, "default_value": "now()"}</data>
+</node>
+<node id="country.country_id">
+  <data key="d0">{"table": "country", "column": "country_id", "data_type": "integer", "is_nullable": false, "default_value": "nextval('country_country_id_seq'::regclass)"}</data>
+</node>
+<node id="country.country">
+  <data key="d0">{"table": "country", "column": "country", "data_type": "character varying", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="country.last_update">
+  <data key="d0">{"table": "country", "column": "last_update", "data_type": "timestamp without time zone", "is_nullable": false, "default_value": "now()"}</data>
+</node>
+<node id="customer.customer_id">
+  <data key="d0">{"table": "customer", "column": "customer_id", "data_type": "integer", "is_nullable": false, "default_value": "nextval('customer_customer_id_seq'::regclass)"}</data>
+</node>
+<node id="customer.store_id">
+  <data key="d0">{"table": "customer", "column": "store_id", "data_type": "smallint", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="customer.first_name">
+  <data key="d0">{"table": "customer", "column": "first_name", "data_type": "character varying", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="customer.last_name">
+  <data key="d0">{"table": "customer", "column": "last_name", "data_type": "character varying", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="customer.email">
+  <data key="d0">{"table": "customer", "column": "email", "data_type": "character varying", "is_nullable": true, "default_value": null}</data>
+</node>
+<node id="customer.address_id">
+  <data key="d0">{"table": "customer", "column": "address_id", "data_type": "smallint", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="customer.activebool">
+  <data key="d0">{"table": "customer", "column": "activebool", "data_type": "boolean", "is_nullable": false, "default_value": "true"}</data>
+</node>
+<node id="customer.create_date">
+  <data key="d0">{"table": "customer", "column": "create_date", "data_type": "date", "is_nullable": false, "default_value": "('now'::text)::date"}</data>
+</node>
+<node id="customer.last_update">
+  <data key="d0">{"table": "customer", "column": "last_update", "data_type": "timestamp without time zone", "is_nullable": true, "default_value": "now()"}</data>
+</node>
+<node id="customer.active">
+  <data key="d0">{"table": "customer", "column": "active", "data_type": "integer", "is_nullable": true, "default_value": null}</data>
+</node>
+<node id="film_actor.actor_id">
+  <data key="d0">{"table": "film_actor", "column": "actor_id", "data_type": "smallint", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="film_actor.film_id">
+  <data key="d0">{"table": "film_actor", "column": "film_id", "data_type": "smallint", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="film_actor.last_update">
+  <data key="d0">{"table": "film_actor", "column": "last_update", "data_type": "timestamp without time zone", "is_nullable": false, "default_value": "now()"}</data>
+</node>
+<node id="film.film_id">
+  <data key="d0">{"table": "film", "column": "film_id", "data_type": "integer", "is_nullable": false, "default_value": "nextval('film_film_id_seq'::regclass)"}</data>
+</node>
+<node id="film_category.film_id">
+  <data key="d0">{"table": "film_category", "column": "film_id", "data_type": "smallint", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="film_category.category_id">
+  <data key="d0">{"table": "film_category", "column": "category_id", "data_type": "smallint", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="film_category.last_update">
+  <data key="d0">{"table": "film_category", "column": "last_update", "data_type": "timestamp without time zone", "is_nullable": false, "default_value": "now()"}</data>
+</node>
+<node id="inventory.inventory_id">
+  <data key="d0">{"table": "inventory", "column": "inventory_id", "data_type": "integer", "is_nullable": false, "default_value": "nextval('inventory_inventory_id_seq'::regclass)"}</data>
+</node>
+<node id="inventory.film_id">
+  <data key="d0">{"table": "inventory", "column": "film_id", "data_type": "smallint", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="inventory.store_id">
+  <data key="d0">{"table": "inventory", "column": "store_id", "data_type": "smallint", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="inventory.last_update">
+  <data key="d0">{"table": "inventory", "column": "last_update", "data_type": "timestamp without time zone", "is_nullable": false, "default_value": "now()"}</data>
+</node>
+<node id="language.language_id">
+  <data key="d0">{"table": "language", "column": "language_id", "data_type": "integer", "is_nullable": false, "default_value": "nextval('language_language_id_seq'::regclass)"}</data>
+</node>
+<node id="language.name">
+  <data key="d0">{"table": "language", "column": "name", "data_type": "character", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="language.last_update">
+  <data key="d0">{"table": "language", "column": "last_update", "data_type": "timestamp without time zone", "is_nullable": false, "default_value": "now()"}</data>
+</node>
+<node id="rental.rental_id">
+  <data key="d0">{"table": "rental", "column": "rental_id", "data_type": "integer", "is_nullable": false, "default_value": "nextval('rental_rental_id_seq'::regclass)"}</data>
+</node>
+<node id="rental.rental_date">
+  <data key="d0">{"table": "rental", "column": "rental_date", "data_type": "timestamp without time zone", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="rental.inventory_id">
+  <data key="d0">{"table": "rental", "column": "inventory_id", "data_type": "integer", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="rental.customer_id">
+  <data key="d0">{"table": "rental", "column": "customer_id", "data_type": "smallint", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="rental.return_date">
+  <data key="d0">{"table": "rental", "column": "return_date", "data_type": "timestamp without time zone", "is_nullable": true, "default_value": null}</data>
+</node>
+<node id="rental.staff_id">
+  <data key="d0">{"table": "rental", "column": "staff_id", "data_type": "smallint", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="rental.last_update">
+  <data key="d0">{"table": "rental", "column": "last_update", "data_type": "timestamp without time zone", "is_nullable": false, "default_value": "now()"}</data>
+</node>
+<node id="staff.first_name">
+  <data key="d0">{"table": "staff", "column": "first_name", "data_type": "character varying", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="staff.last_name">
+  <data key="d0">{"table": "staff", "column": "last_name", "data_type": "character varying", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="staff.address_id">
+  <data key="d0">{"table": "staff", "column": "address_id", "data_type": "smallint", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="staff.email">
+  <data key="d0">{"table": "staff", "column": "email", "data_type": "character varying", "is_nullable": true, "default_value": null}</data>
+</node>
+<node id="staff.store_id">
+  <data key="d0">{"table": "staff", "column": "store_id", "data_type": "smallint", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="staff.active">
+  <data key="d0">{"table": "staff", "column": "active", "data_type": "boolean", "is_nullable": false, "default_value": "true"}</data>
+</node>
+<node id="staff.username">
+  <data key="d0">{"table": "staff", "column": "username", "data_type": "character varying", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="staff.password">
+  <data key="d0">{"table": "staff", "column": "password", "data_type": "character varying", "is_nullable": true, "default_value": null}</data>
+</node>
+<node id="staff.last_update">
+  <data key="d0">{"table": "staff", "column": "last_update", "data_type": "timestamp without time zone", "is_nullable": false, "default_value": "now()"}</data>
+</node>
+<node id="staff.picture">
+  <data key="d0">{"table": "staff", "column": "picture", "data_type": "bytea", "is_nullable": true, "default_value": null}</data>
+</node>
+<node id="payment.payment_id">
+  <data key="d0">{"table": "payment", "column": "payment_id", "data_type": "integer", "is_nullable": false, "default_value": "nextval('payment_payment_id_seq'::regclass)"}</data>
+</node>
+<node id="payment.customer_id">
+  <data key="d0">{"table": "payment", "column": "customer_id", "data_type": "smallint", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="payment.staff_id">
+  <data key="d0">{"table": "payment", "column": "staff_id", "data_type": "smallint", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="payment.rental_id">
+  <data key="d0">{"table": "payment", "column": "rental_id", "data_type": "integer", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="payment.amount">
+  <data key="d0">{"table": "payment", "column": "amount", "data_type": "numeric", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="payment.payment_date">
+  <data key="d0">{"table": "payment", "column": "payment_date", "data_type": "timestamp without time zone", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="film.title">
+  <data key="d0">{"table": "film", "column": "title", "data_type": "character varying", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="film.description">
+  <data key="d0">{"table": "film", "column": "description", "data_type": "text", "is_nullable": true, "default_value": null}</data>
+</node>
+<node id="film.release_year">
+  <data key="d0">{"table": "film", "column": "release_year", "data_type": "integer", "is_nullable": true, "default_value": null}</data>
+</node>
+<node id="film.language_id">
+  <data key="d0">{"table": "film", "column": "language_id", "data_type": "smallint", "is_nullable": false, "default_value": null}</data>
+</node>
+<node id="film.rental_duration">
+  <data key="d0">{"table": "film", "column": "rental_duration", "data_type": "smallint", "is_nullable": false, "default_value": "3"}</data>
+</node>
+<node id="film.rental_rate">
+  <data key="d0">{"table": "film", "column": "rental_rate", "data_type": "numeric", "is_nullable": false, "default_value": "4.99"}</data>
+</node>
+<node id="film.length">
+  <data key="d0">{"table": "film", "column": "length", "data_type": "smallint", "is_nullable": true, "default_value": null}</data>
+</node>
+<node id="film.replacement_cost">
+  <data key="d0">{"table": "film", "column": "replacement_cost", "data_type": "numeric", "is_nullable": false, "default_value": "19.99"}</data>
+</node>
+<node id="film.rating">
+  <data key="d0">{"table": "film", "column": "rating", "data_type": "USER-DEFINED", "is_nullable": true, "default_value": "'G'::mpaa_rating"}</data>
+</node>
+<node id="film.last_update">
+  <data key="d0">{"table": "film", "column": "last_update", "data_type": "timestamp without time zone", "is_nullable": false, "default_value": "now()"}</data>
+</node>
+<node id="film.special_features">
+  <data key="d0">{"table": "film", "column": "special_features", "data_type": "ARRAY", "is_nullable": true, "default_value": null}</data>
+</node>
+<node id="film.fulltext">
+  <data key="d0">{"table": "film", "column": "fulltext", "data_type": "tsvector", "is_nullable": false, "default_value": null}</data>
+</node>
+<edge source="actor.actor_id" target="actor.first_name"/>
+<edge source="actor.actor_id" target="actor.last_name"/>
+<edge source="actor.actor_id" target="actor.last_update"/>
+<edge source="actor.actor_id" target="film_actor.actor_id">
+  <data key="d1">foreign_key</data>
+</edge>
+<edge source="actor.first_name" target="actor.last_name"/>
+<edge source="actor.first_name" target="actor.last_update"/>
+<edge source="actor.last_name" target="actor.last_update"/>
+<edge source="store.store_id" target="store.manager_staff_id"/>
+<edge source="store.store_id" target="store.address_id"/>
+<edge source="store.store_id" target="store.last_update"/>
+<edge source="store.manager_staff_id" target="store.address_id"/>
+<edge source="store.manager_staff_id" target="store.last_update"/>
+<edge source="store.manager_staff_id" target="staff.staff_id">
+  <data key="d1">foreign_key</data>
+</edge>
+<edge source="store.address_id" target="store.last_update"/>
+<edge source="store.address_id" target="address.address_id">
+  <data key="d1">foreign_key</data>
+</edge>
+<edge source="address.address_id" target="address.address"/>
+<edge source="address.address_id" target="address.address2"/>
+<edge source="address.address_id" target="address.district"/>
+<edge source="address.address_id" target="address.city_id"/>
+<edge source="address.address_id" target="address.postal_code"/>
+<edge source="address.address_id" target="address.phone"/>
+<edge source="address.address_id" target="address.last_update"/>
+<edge source="address.address_id" target="customer.address_id">
+  <data key="d1">foreign_key</data>
+</edge>
+<edge source="address.address_id" target="staff.address_id">
+  <data key="d1">foreign_key</data>
+</edge>
+<edge source="staff.staff_id" target="rental.staff_id">
+  <data key="d1">foreign_key</data>
+</edge>
+<edge source="staff.staff_id" target="staff.first_name"/>
+<edge source="staff.staff_id" target="staff.last_name"/>
+<edge source="staff.staff_id" target="staff.address_id"/>
+<edge source="staff.staff_id" target="staff.email"/>
+<edge source="staff.staff_id" target="staff.store_id"/>
+<edge source="staff.staff_id" target="staff.active"/>
+<edge source="staff.staff_id" target="staff.username"/>
+<edge source="staff.staff_id" target="staff.password"/>
+<edge source="staff.staff_id" target="staff.last_update"/>
+<edge source="staff.staff_id" target="staff.picture"/>
+<edge source="staff.staff_id" target="payment.staff_id">
+  <data key="d1">foreign_key</data>
+</edge>
+<edge source="address.address" target="address.address2"/>
+<edge source="address.address" target="address.district"/>
+<edge source="address.address" target="address.city_id"/>
+<edge source="address.address" target="address.postal_code"/>
+<edge source="address.address" target="address.phone"/>
+<edge source="address.address" target="address.last_update"/>
+<edge source="address.address2" target="address.district"/>
+<edge source="address.address2" target="address.city_id"/>
+<edge source="address.address2" target="address.postal_code"/>
+<edge source="address.address2" target="address.phone"/>
+<edge source="address.address2" target="address.last_update"/>
+<edge source="address.district" target="address.city_id"/>
+<edge source="address.district" target="address.postal_code"/>
+<edge source="address.district" target="address.phone"/>
+<edge source="address.district" target="address.last_update"/>
+<edge source="address.city_id" target="address.postal_code"/>
+<edge source="address.city_id" target="address.phone"/>
+<edge source="address.city_id" target="address.last_update"/>
+<edge source="address.city_id" target="city.city_id">
+  <data key="d1">foreign_key</data>
+</edge>
+<edge source="address.postal_code" target="address.phone"/>
+<edge source="address.postal_code" target="address.last_update"/>
+<edge source="address.phone" target="address.last_update"/>
+<edge source="city.city_id" target="city.city"/>
+<edge source="city.city_id" target="city.country_id"/>
+<edge source="city.city_id" target="city.last_update"/>
+<edge source="category.category_id" target="category.name"/>
+<edge source="category.category_id" target="category.last_update"/>
+<edge source="category.category_id" target="film_category.category_id">
+  <data key="d1">foreign_key</data>
+</edge>
+<edge source="category.name" target="category.last_update"/>
+<edge source="city.city" target="city.country_id"/>
+<edge source="city.city" target="city.last_update"/>
+<edge source="city.country_id" target="city.last_update"/>
+<edge source="city.country_id" target="country.country_id">
+  <data key="d1">foreign_key</data>
+</edge>
+<edge source="country.country_id" target="country.country"/>
+<edge source="country.country_id" target="country.last_update"/>
+<edge source="country.country" target="country.last_update"/>
+<edge source="customer.customer_id" target="customer.store_id"/>
+<edge source="customer.customer_id" target="customer.first_name"/>
+<edge source="customer.customer_id" target="customer.last_name"/>
+<edge source="customer.customer_id" target="customer.email"/>
+<edge source="customer.customer_id" target="customer.address_id"/>
+<edge source="customer.customer_id" target="customer.activebool"/>
+<edge source="customer.customer_id" target="customer.create_date"/>
+<edge source="customer.customer_id" target="customer.last_update"/>
+<edge source="customer.customer_id" target="customer.active"/>
+<edge source="customer.customer_id" target="rental.customer_id">
+  <data key="d1">foreign_key</data>
+</edge>
+<edge source="customer.customer_id" target="payment.customer_id">
+  <data key="d1">foreign_key</data>
+</edge>
+<edge source="customer.store_id" target="customer.first_name"/>
+<edge source="customer.store_id" target="customer.last_name"/>
+<edge source="customer.store_id" target="customer.email"/>
+<edge source="customer.store_id" target="customer.address_id"/>
+<edge source="customer.store_id" target="customer.activebool"/>
+<edge source="customer.store_id" target="customer.create_date"/>
+<edge source="customer.store_id" target="customer.last_update"/>
+<edge source="customer.store_id" target="customer.active"/>
+<edge source="customer.first_name" target="customer.last_name"/>
+<edge source="customer.first_name" target="customer.email"/>
+<edge source="customer.first_name" target="customer.address_id"/>
+<edge source="customer.first_name" target="customer.activebool"/>
+<edge source="customer.first_name" target="customer.create_date"/>
+<edge source="customer.first_name" target="customer.last_update"/>
+<edge source="customer.first_name" target="customer.active"/>
+<edge source="customer.last_name" target="customer.email"/>
+<edge source="customer.last_name" target="customer.address_id"/>
+<edge source="customer.last_name" target="customer.activebool"/>
+<edge source="customer.last_name" target="customer.create_date"/>
+<edge source="customer.last_name" target="customer.last_update"/>
+<edge source="customer.last_name" target="customer.active"/>
+<edge source="customer.email" target="customer.address_id"/>
+<edge source="customer.email" target="customer.activebool"/>
+<edge source="customer.email" target="customer.create_date"/>
+<edge source="customer.email" target="customer.last_update"/>
+<edge source="customer.email" target="customer.active"/>
+<edge source="customer.address_id" target="customer.activebool"/>
+<edge source="customer.address_id" target="customer.create_date"/>
+<edge source="customer.address_id" target="customer.last_update"/>
+<edge source="customer.address_id" target="customer.active"/>
+<edge source="customer.activebool" target="customer.create_date"/>
+<edge source="customer.activebool" target="customer.last_update"/>
+<edge source="customer.activebool" target="customer.active"/>
+<edge source="customer.create_date" target="customer.last_update"/>
+<edge source="customer.create_date" target="customer.active"/>
+<edge source="customer.last_update" target="customer.active"/>
+<edge source="film_actor.actor_id" target="film_actor.film_id"/>
+<edge source="film_actor.actor_id" target="film_actor.last_update"/>
+<edge source="film_actor.film_id" target="film_actor.last_update"/>
+<edge source="film_actor.film_id" target="film.film_id">
+  <data key="d1">foreign_key</data>
+</edge>
+<edge source="film.film_id" target="film_category.film_id">
+  <data key="d1">foreign_key</data>
+</edge>
+<edge source="film.film_id" target="inventory.film_id">
+  <data key="d1">foreign_key</data>
+</edge>
+<edge source="film.film_id" target="film.title"/>
+<edge source="film.film_id" target="film.description"/>
+<edge source="film.film_id" target="film.release_year"/>
+<edge source="film.film_id" target="film.language_id"/>
+<edge source="film.film_id" target="film.rental_duration"/>
+<edge source="film.film_id" target="film.rental_rate"/>
+<edge source="film.film_id" target="film.length"/>
+<edge source="film.film_id" target="film.replacement_cost"/>
+<edge source="film.film_id" target="film.rating"/>
+<edge source="film.film_id" target="film.last_update"/>
+<edge source="film.film_id" target="film.special_features"/>
+<edge source="film.film_id" target="film.fulltext"/>
+<edge source="film_category.film_id" target="film_category.category_id"/>
+<edge source="film_category.film_id" target="film_category.last_update"/>
+<edge source="film_category.category_id" target="film_category.last_update"/>
+<edge source="inventory.inventory_id" target="inventory.film_id"/>
+<edge source="inventory.inventory_id" target="inventory.store_id"/>
+<edge source="inventory.inventory_id" target="inventory.last_update"/>
+<edge source="inventory.inventory_id" target="rental.inventory_id">
+  <data key="d1">foreign_key</data>
+</edge>
+<edge source="inventory.film_id" target="inventory.store_id"/>
+<edge source="inventory.film_id" target="inventory.last_update"/>
+<edge source="inventory.store_id" target="inventory.last_update"/>
+<edge source="language.language_id" target="language.name"/>
+<edge source="language.language_id" target="language.last_update"/>
+<edge source="language.language_id" target="film.language_id">
+  <data key="d1">foreign_key</data>
+</edge>
+<edge source="language.name" target="language.last_update"/>
+<edge source="rental.rental_id" target="rental.rental_date"/>
+<edge source="rental.rental_id" target="rental.inventory_id"/>
+<edge source="rental.rental_id" target="rental.customer_id"/>
+<edge source="rental.rental_id" target="rental.return_date"/>
+<edge source="rental.rental_id" target="rental.staff_id"/>
+<edge source="rental.rental_id" target="rental.last_update"/>
+<edge source="rental.rental_id" target="payment.rental_id">
+  <data key="d1">foreign_key</data>
+</edge>
+<edge source="rental.rental_date" target="rental.inventory_id"/>
+<edge source="rental.rental_date" target="rental.customer_id"/>
+<edge source="rental.rental_date" target="rental.return_date"/>
+<edge source="rental.rental_date" target="rental.staff_id"/>
+<edge source="rental.rental_date" target="rental.last_update"/>
+<edge source="rental.inventory_id" target="rental.customer_id"/>
+<edge source="rental.inventory_id" target="rental.return_date"/>
+<edge source="rental.inventory_id" target="rental.staff_id"/>
+<edge source="rental.inventory_id" target="rental.last_update"/>
+<edge source="rental.customer_id" target="rental.return_date"/>
+<edge source="rental.customer_id" target="rental.staff_id"/>
+<edge source="rental.customer_id" target="rental.last_update"/>
+<edge source="rental.return_date" target="rental.staff_id"/>
+<edge source="rental.return_date" target="rental.last_update"/>
+<edge source="rental.staff_id" target="rental.last_update"/>
+<edge source="staff.first_name" target="staff.last_name"/>
+<edge source="staff.first_name" target="staff.address_id"/>
+<edge source="staff.first_name" target="staff.email"/>
+<edge source="staff.first_name" target="staff.store_id"/>
+<edge source="staff.first_name" target="staff.active"/>
+<edge source="staff.first_name" target="staff.username"/>
+<edge source="staff.first_name" target="staff.password"/>
+<edge source="staff.first_name" target="staff.last_update"/>
+<edge source="staff.first_name" target="staff.picture"/>
+<edge source="staff.last_name" target="staff.address_id"/>
+<edge source="staff.last_name" target="staff.email"/>
+<edge source="staff.last_name" target="staff.store_id"/>
+<edge source="staff.last_name" target="staff.active"/>
+<edge source="staff.last_name" target="staff.username"/>
+<edge source="staff.last_name" target="staff.password"/>
+<edge source="staff.last_name" target="staff.last_update"/>
+<edge source="staff.last_name" target="staff.picture"/>
+<edge source="staff.address_id" target="staff.email"/>
+<edge source="staff.address_id" target="staff.store_id"/>
+<edge source="staff.address_id" target="staff.active"/>
+<edge source="staff.address_id" target="staff.username"/>
+<edge source="staff.address_id" target="staff.password"/>
+<edge source="staff.address_id" target="staff.last_update"/>
+<edge source="staff.address_id" target="staff.picture"/>
+<edge source="staff.email" target="staff.store_id"/>
+<edge source="staff.email" target="staff.active"/>
+<edge source="staff.email" target="staff.username"/>
+<edge source="staff.email" target="staff.password"/>
+<edge source="staff.email" target="staff.last_update"/>
+<edge source="staff.email" target="staff.picture"/>
+<edge source="staff.store_id" target="staff.active"/>
+<edge source="staff.store_id" target="staff.username"/>
+<edge source="staff.store_id" target="staff.password"/>
+<edge source="staff.store_id" target="staff.last_update"/>
+<edge source="staff.store_id" target="staff.picture"/>
+<edge source="staff.active" target="staff.username"/>
+<edge source="staff.active" target="staff.password"/>
+<edge source="staff.active" target="staff.last_update"/>
+<edge source="staff.active" target="staff.picture"/>
+<edge source="staff.username" target="staff.password"/>
+<edge source="staff.username" target="staff.last_update"/>
+<edge source="staff.username" target="staff.picture"/>
+<edge source="staff.password" target="staff.last_update"/>
+<edge source="staff.password" target="staff.picture"/>
+<edge source="staff.last_update" target="staff.picture"/>
+<edge source="payment.payment_id" target="payment.customer_id"/>
+<edge source="payment.payment_id" target="payment.staff_id"/>
+<edge source="payment.payment_id" target="payment.rental_id"/>
+<edge source="payment.payment_id" target="payment.amount"/>
+<edge source="payment.payment_id" target="payment.payment_date"/>
+<edge source="payment.customer_id" target="payment.staff_id"/>
+<edge source="payment.customer_id" target="payment.rental_id"/>
+<edge source="payment.customer_id" target="payment.amount"/>
+<edge source="payment.customer_id" target="payment.payment_date"/>
+<edge source="payment.staff_id" target="payment.rental_id"/>
+<edge source="payment.staff_id" target="payment.amount"/>
+<edge source="payment.staff_id" target="payment.payment_date"/>
+<edge source="payment.rental_id" target="payment.amount"/>
+<edge source="payment.rental_id" target="payment.payment_date"/>
+<edge source="payment.amount" target="payment.payment_date"/>
+<edge source="film.title" target="film.description"/>
+<edge source="film.title" target="film.release_year"/>
+<edge source="film.title" target="film.language_id"/>
+<edge source="film.title" target="film.rental_duration"/>
+<edge source="film.title" target="film.rental_rate"/>
+<edge source="film.title" target="film.length"/>
+<edge source="film.title" target="film.replacement_cost"/>
+<edge source="film.title" target="film.rating"/>
+<edge source="film.title" target="film.last_update"/>
+<edge source="film.title" target="film.special_features"/>
+<edge source="film.title" target="film.fulltext"/>
+<edge source="film.description" target="film.release_year"/>
+<edge source="film.description" target="film.language_id"/>
+<edge source="film.description" target="film.rental_duration"/>
+<edge source="film.description" target="film.rental_rate"/>
+<edge source="film.description" target="film.length"/>
+<edge source="film.description" target="film.replacement_cost"/>
+<edge source="film.description" target="film.rating"/>
+<edge source="film.description" target="film.last_update"/>
+<edge source="film.description" target="film.special_features"/>
+<edge source="film.description" target="film.fulltext"/>
+<edge source="film.release_year" target="film.language_id"/>
+<edge source="film.release_year" target="film.rental_duration"/>
+<edge source="film.release_year" target="film.rental_rate"/>
+<edge source="film.release_year" target="film.length"/>
+<edge source="film.release_year" target="film.replacement_cost"/>
+<edge source="film.release_year" target="film.rating"/>
+<edge source="film.release_year" target="film.last_update"/>
+<edge source="film.release_year" target="film.special_features"/>
+<edge source="film.release_year" target="film.fulltext"/>
+<edge source="film.language_id" target="film.rental_duration"/>
+<edge source="film.language_id" target="film.rental_rate"/>
+<edge source="film.language_id" target="film.length"/>
+<edge source="film.language_id" target="film.replacement_cost"/>
+<edge source="film.language_id" target="film.rating"/>
+<edge source="film.language_id" target="film.last_update"/>
+<edge source="film.language_id" target="film.special_features"/>
+<edge source="film.language_id" target="film.fulltext"/>
+<edge source="film.rental_duration" target="film.rental_rate"/>
+<edge source="film.rental_duration" target="film.length"/>
+<edge source="film.rental_duration" target="film.replacement_cost"/>
+<edge source="film.rental_duration" target="film.rating"/>
+<edge source="film.rental_duration" target="film.last_update"/>
+<edge source="film.rental_duration" target="film.special_features"/>
+<edge source="film.rental_duration" target="film.fulltext"/>
+<edge source="film.rental_rate" target="film.length"/>
+<edge source="film.rental_rate" target="film.replacement_cost"/>
+<edge source="film.rental_rate" target="film.rating"/>
+<edge source="film.rental_rate" target="film.last_update"/>
+<edge source="film.rental_rate" target="film.special_features"/>
+<edge source="film.rental_rate" target="film.fulltext"/>
+<edge source="film.length" target="film.replacement_cost"/>
+<edge source="film.length" target="film.rating"/>
+<edge source="film.length" target="film.last_update"/>
+<edge source="film.length" target="film.special_features"/>
+<edge source="film.length" target="film.fulltext"/>
+<edge source="film.replacement_cost" target="film.rating"/>
+<edge source="film.replacement_cost" target="film.last_update"/>
+<edge source="film.replacement_cost" target="film.special_features"/>
+<edge source="film.replacement_cost" target="film.fulltext"/>
+<edge source="film.rating" target="film.last_update"/>
+<edge source="film.rating" target="film.special_features"/>
+<edge source="film.rating" target="film.fulltext"/>
+<edge source="film.last_update" target="film.special_features"/>
+<edge source="film.last_update" target="film.fulltext"/>
+<edge source="film.special_features" target="film.fulltext"/>
+</graph></graphml>

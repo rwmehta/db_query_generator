@@ -10,7 +10,10 @@ import os
 from dotenv import load_dotenv, dotenv_values 
 import tiktoken
 load_dotenv() 
-
+import plotly.express as px
+import plotly.graph_objects as go
+import code_rag
+import graph_search
 client = OpenAI(api_key=os.getenv("OPENAI_API_KEY"))
 
 
@@ -31,7 +34,8 @@ def main():
     def token_counter(string: str, encoding_name: str) -> str:
         encoding = tiktoken.get_encoding(encoding_name)
         num_tokens = len(encoding.encode(string))
-        if num_tokens > 16000:
+        print(num_tokens)
+        if num_tokens > 8000:
             return "summarize"
         else:
             return "continue"
@@ -68,7 +72,7 @@ def main():
                     },
                 ],
                 temperature=1,
-                max_tokens=1602,
+                # max_tokens=1602,
                 top_p=1,
                 frequency_penalty=0,
                 presence_penalty=0
@@ -82,7 +86,8 @@ def main():
         except:
             summary(history)
 
-    async def make_graph() -> None:
+    # async 
+    def make_graph() -> None:
         graph_var = text.value
         text.value = ''
         nonlocal graph_history
@@ -93,19 +98,26 @@ def main():
         
         cols = str(list(df.columns))
 
+        try:
+            code_rag_out = code_rag.code_search(graph_history + " " + graph_var)
+            code_example = code_rag_out['matches'][0]['metadata']['code']
+        except:
+            code_example = "fig = px.bar(df, x='Categories', y='Values', title='Bar Chart Example')\nfig.update_layout(xaxis_title='Categories', yaxis_title='Values')\nui.plotly(fig).classes('w-full h-40').style('width: 600px; height: 300px')"
+
         response_message.clear()
         sum_check = (
                             f"You will receive four inputs. The first one is a list of columns in the pandas dataframe (starting with 'DF: '), "
                             f"the second is a description of the graph or change in the graph you are tasked with creating (starting with 'Graph: '), "
                             f"the third is the history of the graphing requests up to this point, this may be empty for the first request (starting with 'History: '), "
                             f"finally there is the psql query that generated this graph (starting with 'Query: ')"
-                            f"The code has to be in python and in this format in order to integrate with the gui package being used: "
-                            f"with ui.pyplot(figsize=(6, 4)):"
-                            f"    df.plot.bar( ax=plt.gca())"
-                            f"the dataframe object variable is df, so use that for the graph data."
+                            f"The code has to be in python and in this format in order to integrate with the gui package being used: \\n"
+                            f"{code_example}"
+                            f"\\n the pandas dataframe object variable is df, so use that for the graph data."
                             f"if any additional calculations need to be done numpy can be used, which has already been imported as np."
+                            f"Only plotly should be used for graphing and plotly.express as px and plotly.graph_objects as go have already been imported."
                             f"There should never be any additional imports regardless of the description of the graph you have been tasked with."
                             f"The value that code corresponds to in the dictionary must be syntactically correct python code that can be run with exec. Absolutely no explanation or extraneous information in the code"
+                            f"Make absolutely sure there is proper spacing so the code can be run with exec()."
                             f"You should return a JSON in this format:\\n"
                             f'{{"code": "<python code in the given format for the graph>"}}'
                             f"If no description is provided or the task is not applicable to graphing return JSON in this format:\\n"
@@ -124,13 +136,14 @@ def main():
                             f"the second is a description of the graph or change in the graph you are tasked with creating (starting with 'Graph: '), "
                             f"the third is the history of the graphing requests up to this point, this may be empty for the first request (starting with 'History: '), "
                             f"finally there is the psql query that generated this graph (starting with 'Query: ')"
-                            f"The code has to be in python and in this format in order to integrate with the gui package being used: "
-                            f"with ui.pyplot(figsize=(6, 4)):"
-                            f"    df.plot.bar( ax=plt.gca())"
-                            f"the dataframe object variable is df, so use that for the graph data."
+                            f"The code has to be in python and in this format in order to integrate with the gui package being used: \\n"
+                            f"{code_example}"
+                            f"\\n the pandas dataframe object variable is df, so use that for the graph data."
                             f"if any additional calculations need to be done numpy can be used, which has already been imported as np."
+                            f"Only plotly should be used for graphing and plotly.express as px and plotly.graph_objects as go have already been imported."
                             f"There should never be any additional imports regardless of the description of the graph you have been tasked with."
                             f"The value that code corresponds to in the dictionary must be syntactically correct python code that can be run with exec. Absolutely no explanation or extraneous information in the code"
+                            f"Make absolutely sure there is proper spacing so the code can be run with exec()."
                             f"You should return a JSON in this format:\\n"
                             f'{{"code": "<python code in the given format for the graph>"}}'
                             f"If no description is provided or the task is not applicable to graphing return JSON in this format:\\n"
@@ -165,7 +178,7 @@ def main():
                 },
             ],
             temperature=1,
-            max_tokens=1602,
+            # max_tokens=1602,
             top_p=1,
             frequency_penalty=0,
             presence_penalty=0
@@ -189,7 +202,7 @@ def main():
                     code = json_object["code"]
                     code = remove_import_lines(code)
                     with ui.dialog() as dialog, ui.card():
-                            ui.label(query)
+                            ui.label(code)
                     with response_message:
                         exec(json_object["code"])
                         ui.button(icon="code").on('click', dialog.open)
@@ -206,7 +219,8 @@ def main():
         
 
 
-    async def make_query() -> None:
+    # async 
+    def make_query() -> None:
 
         conn = psycopg2.connect(database="dvdrental", user="postgres", password=os.getenv("DB_PASSWORD"), host="localhost", port="5432")
 
@@ -217,6 +231,9 @@ def main():
         user_prompt = text.value
         text.value = ''
 
+        db_info = graph_search.all_together(query=history + " " + query)
+        db_info = str(db_info)
+        
         with message_container:
             ui.chat_message(text=user_prompt, name='You', sent=True)
             response_message = ui.chat_message(name='Bot', sent=False)
@@ -263,7 +280,7 @@ def main():
                     },
                 ],
                 temperature=1,
-                max_tokens=1602,
+                # max_tokens=1602,
                 top_p=1,
                 frequency_penalty=0,
                 presence_penalty=0
@@ -289,6 +306,7 @@ def main():
                             )
             tk_count = token_counter(sum_check, "o200k_base")
             if tk_count == "summarize":
+                print("starting sum")
                 history = summary(history)
                 sum_check = (
                                 f"You will receive four inputs. The first one is a description of the database (starting with 'DB: '), "
@@ -333,7 +351,7 @@ def main():
                     },
                 ],
                 temperature=1,
-                max_tokens=1602,
+                # max_tokens=1602,
                 top_p=1,
                 frequency_penalty=0,
                 presence_penalty=0
@@ -363,7 +381,7 @@ def main():
                     with ui.dialog() as dialog, ui.card():
                             ui.label(query)
                     with response_message:
-                        ui.aggrid.from_pandas(df).classes('max-h-40').style('width: 400px; height: 300px')
+                        ui.aggrid.from_pandas(df).classes('max-h-40').style('width: 600px; height: 300px')
                         ui.button(icon="code").on('click', dialog.open)
                 else:
                     with response_message:
@@ -416,7 +434,7 @@ def main():
                         },
                     ],
                     temperature=1,
-                    max_tokens=1602,
+                    # max_tokens=1602,
                     top_p=1,
                     frequency_penalty=0,
                     presence_penalty=0
@@ -441,7 +459,7 @@ def main():
                         with ui.dialog() as dialog, ui.card():
                             ui.label(query)
                         with response_message:
-                            ui.aggrid.from_pandas(df).classes('max-h-40')
+                            ui.aggrid.from_pandas(df).classes('max-h-40').style('width: 600px; height: 300px')
                             ui.button(icon="code").on('click', dialog.open)
                         ui.run_javascript('window.scrollTo(0, document.body.scrollHeight)')
                         message_container.remove(spinner)
@@ -480,7 +498,8 @@ def main():
         # cur.close()
         # message_container.remove(spinner)
 
-    async def clear_history() -> None:
+    # async 
+    def clear_history() -> None:
         nonlocal history
         nonlocal graph_history
         nonlocal message_container
@@ -502,7 +521,7 @@ def main():
 
     with ui.tabs().classes('w-full') as tabs:
         chat_tab = ui.tab('Chat')
-        logs_tab = ui.tab('Logs')
+        logs_tab = ui.tab('History')
     with ui.tab_panels(tabs, value=chat_tab).classes('w-full max-w-2xl mx-auto flex-grow items-stretch'):
         message_container = ui.tab_panel(chat_tab).classes('items-stretch')
         with ui.tab_panel(logs_tab):
@@ -515,7 +534,7 @@ def main():
             text = ui.input(placeholder="placeholder").props('rounded outlined input-class=mx-3') \
                 .classes('w-full self-center').on('keydown.enter', make_query)
             ui.button(icon="bar_chart").on('click', make_graph)
-        ui.markdown('simple chat app built with [NiceGUI](https://nicegui.io)') \
+        ui.markdown('DB chat app built with [NiceGUI](https://nicegui.io)') \
             .classes('text-xs self-end mr-8 m-[-1em] text-primary')
 
 
